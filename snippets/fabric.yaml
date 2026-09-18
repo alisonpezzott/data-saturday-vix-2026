@@ -1,0 +1,10 @@
+activeProfile: default
+profiles:
+  default:
+    semanticModels:
+      comercial:
+        workspaceId: <workspace-id>
+        itemId: <semantic-model-id>
+      financeiro:
+        workspaceId: <workspace-id>
+        itemId: <semantic-model-id>

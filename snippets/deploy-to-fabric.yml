@@ -1,0 +1,17 @@
+on:
+  push: { branches: [main] }
+  workflow_dispatch:
+    inputs: { force: { type: boolean, default: false } }
+concurrency: { group: deploy-${{ github.ref }}, cancel-in-progress: true }
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install -g @microsoft/rayfin-cli
+      - run: >
+          rayfin login --service-principal
+          -t $TENANT_ID -u $CLIENT_ID -p $CLIENT_SECRET
+      - run: >
+          rayfin up --workspace "$FABRIC_WORKSPACE_NAME" --yes
+          ${{ inputs.force && '--force' || '' }}

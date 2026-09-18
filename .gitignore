@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.slidev/
+png-review/
+*.pdf
+*.pptx
+*-export.png
+*-export/
+.vite-inspect/
+.env

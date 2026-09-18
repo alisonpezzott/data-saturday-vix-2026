@@ -1,0 +1,15 @@
+id: receita-saudavel
+name: Receita Saudavel
+version: 1.0.0
+services:
+  data:
+    enabled: false     # no DB: DAX on models
+  auth:
+    enabled: true
+    fabric:
+      enabled: true
+  staticHosting:
+    enabled: true
+    folder: dist
+    # regenerates fabric.generated.ts first
+    buildCommand: npm run build:fabric

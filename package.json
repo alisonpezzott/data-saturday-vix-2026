@@ -1,0 +1,26 @@
+{
+  "name": "deck-fabric-apps-data-saturday-vix-2026",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "slidev --open",
+    "build": "slidev build --without-notes",
+    "export": "slidev export --per-slide --with-clicks",
+    "export:png": "slidev export --format png --per-slide --output png-review",
+    "format": "slidev format",
+    "qr": "node scripts/qr.mjs",
+    "deploy": "node scripts/deploy.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/geist": "5.3.0",
+    "@fontsource-variable/geist-mono": "5.3.0",
+    "@slidev/cli": "52.19.0",
+    "vue": "3.5.41"
+  },
+  "devDependencies": {
+    "@azure/static-web-apps-cli": "2.0.10",
+    "@slidev/types": "52.19.0",
+    "playwright-chromium": "1.62.1",
+    "qrcode": "1.5.4"
+  }
+}

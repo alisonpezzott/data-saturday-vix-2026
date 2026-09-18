@@ -1,0 +1,596 @@
+/* ---------------------------------------------------------------------------
+   Mono — one ground, one ink, one accent.
+
+   Palette: near-black ground, two greys for hierarchy, teal for the single
+   word or line that carries the point of a slide. Every text colour below is
+   annotated with its measured WCAG contrast on the surface it sits on.
+   Everything visual is scoped to `.slidev-layout` so presenter mode, the
+   overview grid and the Slidev UI keep their own styling.
+   --------------------------------------------------------------------------- */
+
+:root {
+  --bg: #0b0b0d;
+  --surface: #131316; /* code blocks, cards */
+  --surface-2: #1b1b1f; /* inline code, mermaid nodes */
+
+  --fg: #f4f4f5; /* 18.2:1 on --bg */
+  --fg-2: #a1a1aa; /* 7.7:1 on --bg · 6.3:1 on --surface-2 — secondary text */
+  --fg-gutter: #8a8a93; /* 5.5:1 on --surface — line numbers are read, not decoration */
+  --fg-ghost: rgba(255, 255, 255, 0.05); /* decorative only, never carries content */
+
+  --rule: rgba(255, 255, 255, 0.1);
+  --rule-strong: rgba(255, 255, 255, 0.2);
+  --node-border: #71717a; /* 3.4:1 on --surface-2 — graphic floor is 3:1 */
+
+  --accent: #2dd4bf; /* 10.5:1 on --bg · #0b0b0d text on accent 11.2:1 */
+  --accent-wash: rgba(45, 212, 191, 0.1);
+
+  --font-sans: 'Geist Variable', 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', 'Cascadia Mono', 'Consolas', ui-monospace, monospace;
+
+  --pad-x: 3.5rem;
+  --pad-top: 3rem;
+  --pad-bottom: 3rem;
+  --radius: 0.5rem;
+
+  --slidev-theme-primary: var(--accent);
+  --slidev-code-background: var(--surface);
+  --slidev-code-foreground: var(--fg);
+}
+
+/* ---------------------------------------------------------------------------
+   1. Base box + typography. `theme: none` supplies no theme CSS, so the
+      sizing below is load-bearing, not cosmetic.
+   --------------------------------------------------------------------------- */
+
+.slidev-layout {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: var(--pad-top) var(--pad-x) var(--pad-bottom);
+  font-family: var(--font-sans);
+  font-size: 1.125rem; /* 18px at canvasWidth 980 — above the 16px floor */
+  line-height: 1.55;
+  color: var(--fg);
+  background: var(--bg);
+  --slidev-code-font-family: var(--font-mono);
+}
+
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-wrap: balance;
+  color: var(--fg);
+}
+
+.slidev-layout h1 {
+  font-size: 2.1rem;
+  margin: 0 0 1.1rem;
+}
+
+/* The one accent word of a heading is written as *emphasis* in Markdown. */
+.slidev-layout h1 em,
+.slidev-layout h2 em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.slidev-layout h2 {
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--fg-2);
+  margin: 0 0 0.8rem;
+}
+
+.slidev-layout h3 {
+  font-size: 1.15rem;
+  margin: 0.4rem 0 0.5rem;
+}
+
+/* h4 = column label; h6 = slide eyebrow. Both mono, both uppercase. */
+.slidev-layout h4 {
+  font: 500 0.72rem/1.3 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+  margin: 0 0 0.7rem;
+}
+
+.slidev-layout h6 {
+  font: 500 0.72rem/1.3 var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 1;
+  margin: 0 0 0.9rem;
+  padding-top: 0;
+}
+
+.slidev-layout p {
+  margin: 0 0 0.75rem;
+}
+
+.slidev-layout p.lead {
+  font-size: 1.25rem;
+  color: var(--fg-2);
+}
+
+.slidev-layout strong {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.slidev-layout a {
+  color: var(--fg);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+}
+
+/* Lists: an accent tick instead of a bullet, a mono counter instead of a digit. */
+.slidev-layout ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.6rem;
+}
+
+.slidev-layout ul > li {
+  position: relative;
+  margin: 0 0 0.55rem;
+  padding-left: 1.4rem;
+  line-height: 1.5;
+}
+
+.slidev-layout ul > li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 0.6rem;
+  height: 2px;
+  background: var(--accent);
+}
+
+.slidev-layout ol {
+  list-style: none;
+  counter-reset: step;
+  padding: 0;
+  margin: 0 0 0.6rem;
+}
+
+.slidev-layout ol > li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 2.4rem;
+  margin: 0 0 0.6rem;
+  line-height: 1.5;
+}
+
+.slidev-layout ol > li::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  font: 500 0.78rem/1 var(--font-mono);
+  letter-spacing: 0.05em;
+  color: var(--accent);
+}
+
+.slidev-layout blockquote {
+  margin: 0.4rem 0 1.1rem;
+  padding: 0.5rem 0 0.5rem 1.1rem;
+  border-left: 2px solid var(--accent);
+  border-radius: 0;
+  background: transparent;
+  color: var(--fg);
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+.slidev-layout blockquote > p {
+  margin: 0;
+}
+
+.slidev-layout blockquote cite,
+.slidev-layout .cite {
+  display: block;
+  margin-top: 0.55rem;
+  font: 500 0.7rem/1.4 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-style: normal;
+  color: var(--fg-2);
+}
+
+/* ---------------------------------------------------------------------------
+   2. Tables
+   --------------------------------------------------------------------------- */
+
+.slidev-layout table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0.2rem 0 0.8rem;
+}
+
+.slidev-layout tr {
+  border: 0;
+}
+
+.slidev-layout th {
+  text-align: left;
+  font: 500 0.7rem/1.3 var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+  padding: 0.45rem 0.7rem 0.55rem;
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.slidev-layout td {
+  padding: 0.5rem 0.7rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.slidev-layout td:first-child {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* ---------------------------------------------------------------------------
+   3. Code
+   --------------------------------------------------------------------------- */
+
+.slidev-layout code,
+.slidev-layout pre,
+.slidev-layout .slidev-code {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+}
+
+.slidev-layout :not(pre) > code {
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  color: #e4e4e7; /* 14.6:1 on --surface-2 */
+  padding: 0.08em 0.38em;
+  border-radius: 0.3rem;
+  font-size: 0.86em;
+  font-weight: 500;
+}
+
+.slidev-layout .slidev-code-wrapper,
+.slidev-layout pre.slidev-code {
+  background: var(--surface) !important;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius) !important;
+  font-size: 0.8rem !important;
+  line-height: 1.6 !important;
+}
+
+/* Slidev paints the gutter with `text-gray-600` in dark mode (2.1:1). Both
+   real selectors — the counter and magic-move's own gutter — are named here. */
+.slidev-layout .slidev-code-line-numbers .slidev-code code .line::before,
+.slidev-layout .slidev-code .shiki-magic-move-line-number {
+  color: var(--fg-gutter);
+  opacity: 1;
+}
+
+/* The marker only exists while some lines are dimmed. In the final `all` step
+   every line carries `highlighted`, and painting all of them would tint the
+   whole block — so the marker is scoped to blocks that still have a
+   `slidev-code-dishonored` sibling to contrast against. */
+.slidev-layout .slidev-code:has(.slidev-code-dishonored) .highlighted {
+  background: var(--accent-wash) !important;
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+/* shiki-magic-move tags every *token* with `highlighted`; the line marker
+   must never paint per token. */
+.slidev-layout .slidev-code .shiki-magic-move-item.highlighted {
+  background: transparent !important;
+  box-shadow: none;
+}
+
+/* Slidev dims other lines to 0.3, which is unreadable from row twelve. */
+.slidev-layout .slidev-code .slidev-code-dishonored {
+  opacity: 0.5;
+}
+
+/* ---------------------------------------------------------------------------
+   4. Layouts
+   --------------------------------------------------------------------------- */
+
+/* cover — title bottom-left, eyebrow top-left, a faint dot grid fading in from
+   the top-right corner. */
+.slidev-layout.cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 3.2rem;
+  overflow: hidden;
+}
+
+.slidev-layout.cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1.4px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse at 88% 18%, #000 0%, transparent 58%);
+  mask-image: radial-gradient(ellipse at 88% 18%, #000 0%, transparent 58%);
+  pointer-events: none;
+}
+
+.slidev-layout.cover h6 {
+  position: absolute;
+  top: var(--pad-top);
+  left: var(--pad-x);
+  margin: 0;
+}
+
+.slidev-layout.cover h1 {
+  font-size: 3.4rem;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  margin: 0 0 0.9rem;
+}
+
+.slidev-layout.cover h2 {
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--fg-2);
+  margin: 0 0 2rem;
+}
+
+.slidev-layout.cover .meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.6rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font: 500 0.72rem/1.3 var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+
+.slidev-layout.cover .meta strong {
+  font-weight: 500;
+  color: #ffffff;
+}
+
+/* section */
+.slidev-layout.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.slidev-layout.section h1 {
+  font-size: 2.9rem;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.9rem;
+  max-width: 78%;
+}
+
+.slidev-layout.section p {
+  font-size: 1.2rem;
+  color: var(--fg-2);
+  max-width: 62%;
+  margin: 0;
+}
+
+.slidev-layout.section .ghost {
+  position: absolute;
+  right: 2.4rem;
+  bottom: 1.4rem;
+  font: 500 11rem/1 var(--font-mono);
+  letter-spacing: -0.06em;
+  color: var(--fg-ghost);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* statement */
+.slidev-layout.statement {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.slidev-layout.statement h1 {
+  font-size: 2.5rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  max-width: 86%;
+  margin: 0 0 1rem;
+}
+
+.slidev-layout.statement p {
+  font-size: 1.15rem;
+  color: var(--fg-2);
+  max-width: 70%;
+}
+
+/* fact */
+.slidev-layout.fact {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.slidev-layout.fact h1 {
+  font: 500 5rem/1 var(--font-mono);
+  letter-spacing: -0.05em;
+  color: var(--accent);
+  margin: 0 0 1.2rem;
+  text-wrap: balance;
+}
+
+.slidev-layout.fact h1 small {
+  font-size: 0.5em;
+  color: var(--fg);
+}
+
+.slidev-layout.fact p {
+  font-size: 1.2rem;
+  color: var(--fg);
+  max-width: 46ch;
+  margin: 0 auto 0.4rem;
+  text-wrap: balance;
+}
+
+.slidev-layout.fact p + p {
+  font-size: 0.95rem;
+  color: var(--fg-2);
+}
+
+/* two-cols / two-cols-header */
+.slidev-layout.two-columns,
+.slidev-layout.two-cols-header {
+  column-gap: 2.5rem;
+}
+
+.slidev-layout.two-cols-header {
+  row-gap: 0.3rem;
+}
+
+.slidev-layout .col-left,
+.slidev-layout .col-right {
+  min-width: 0;
+}
+
+.slidev-layout .col-header h1 {
+  margin-bottom: 0.7rem;
+}
+
+.slidev-layout .col-bottom p {
+  margin: 0;
+}
+
+/* end */
+.slidev-layout.end {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.slidev-layout.end h1 {
+  font-size: 4.2rem;
+  letter-spacing: -0.04em;
+  margin: 0 0 1.6rem;
+}
+
+.slidev-layout.end p {
+  font-size: 1.2rem;
+  color: var(--fg-2);
+}
+
+/* ---------------------------------------------------------------------------
+   5. Small shared roles
+   --------------------------------------------------------------------------- */
+
+.slidev-layout .muted {
+  color: var(--fg-2);
+}
+
+.slidev-layout .mono {
+  font-family: var(--font-mono);
+}
+
+.slidev-layout .small {
+  font-size: 0.9rem;
+}
+
+/* Attribution line at the foot of a content slide, clear of the deck footer. */
+.slidev-layout .credit {
+  position: absolute;
+  left: var(--pad-x);
+  right: var(--pad-x);
+  bottom: 2.3rem;
+  margin: 0;
+  font: 400 0.7rem/1.4 var(--font-mono);
+  letter-spacing: 0.02em;
+  color: var(--fg-2);
+}
+
+.slidev-layout .cards {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 2), 1fr);
+  gap: 1.1rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+.slidev-layout .card {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 0.9rem 1.1rem;
+}
+
+.slidev-layout .card h4 {
+  margin-bottom: 0.45rem;
+}
+
+.slidev-layout .card p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.slidev-layout .card .kpi {
+  display: block;
+  font: 500 2rem/1.1 var(--font-mono);
+  letter-spacing: -0.04em;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+
+/* A QR must survive a phone pointed at a projector: white plate, quiet zone
+   as padding on the plate, size set here rather than by the column. */
+.slidev-layout .qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.slidev-layout figure.qr img {
+  box-sizing: border-box;
+  display: block;
+  width: var(--qr-size, 10rem);
+  height: auto;
+  padding: 0.5rem;
+  background: #ffffff;
+  border-radius: var(--radius);
+}
+
+.slidev-layout .qr--lg {
+  --qr-size: 13rem;
+}
+
+.slidev-layout .qr figcaption {
+  font: 400 0.85rem/1.4 var(--font-mono);
+  color: var(--fg);
+  text-align: center;
+}
+
+/* Mermaid: the SVG inherits nothing useful from the slide, so size it here. */
+.slidev-layout .mermaid {
+  display: flex;
+  justify-content: center;
+  margin: 0.2rem 0 0.8rem;
+}
+
+.slidev-layout .mermaid svg {
+  max-width: 100%;
+  height: auto;
+}

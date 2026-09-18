@@ -1,0 +1,14 @@
+receita-saudavel/
+├── AGENTS.md            # the app's contract
+├── .mcp.json            # rayfin MCP server
+└── .agents/skills/
+    ├── rayfin           # CLI · deploy
+    ├── fabric-sdk       # client · auth
+    ├── schema-discovery # tables · measures
+    ├── dax-authoring    # DAX from measures
+    ├── query-design
+    ├── visuals          # Vega-Lite
+    ├── app-design
+    ├── app-validation   # Playwright pass
+    ├── playwright-cli
+    └── fabric-cli

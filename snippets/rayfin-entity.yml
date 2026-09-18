@@ -1,0 +1,15 @@
+id: collection-plans
+name: Collection Plans
+version: 1.0.0
+services:
+  data:
+    enabled: true      # -> SQL DB + GraphQL
+    dialect: mssql
+  auth:
+    enabled: true
+    fabric:
+      enabled: true    # Entra SSO only
+  staticHosting:
+    enabled: true
+    folder: dist
+    buildCommand: npm run build
