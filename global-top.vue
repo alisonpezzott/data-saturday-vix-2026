@@ -3,13 +3,14 @@
  * Deck footer: event on the left, author and slide counter on the right.
  * Lives in global-top (above the slides) because every layout paints an
  * opaque ground — a global-bottom layer would be hidden behind it.
- * Hidden on the cover and the closing slide, where it would only be noise.
+ * Hidden on the cover, the closing slide and the organisers' full-bleed
+ * artwork, where it would only be noise.
  */
 </script>
 
 <template>
   <footer
-    v-if="!['cover', 'end'].includes($nav.currentLayout ?? '')"
+    v-if="!['cover', 'end', 'bleed'].includes($nav.currentLayout ?? '')"
     class="deck-footer"
     aria-hidden="true"
   >

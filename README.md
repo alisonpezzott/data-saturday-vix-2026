@@ -31,39 +31,41 @@ claude mcp add --transport http slidev http://localhost:3030/__mcp
 
 | Caminho | Conteúdo |
 | :--- | :--- |
-| `slides.md` | Headmatter e capa; importa as dez seções |
+| `slides.md` | Headmatter, os três slides da organização e a capa; importa as dez seções |
 | `slides/NN-*.md` | Uma seção por arquivo, com notas de apresentador e alvo de tempo em cada slide |
 | `snippets/` | Código real importado com `<<<`: entities, policies, `rayfin.yml`, `fabric.yaml`, hook, DAX, GitHub Actions |
 | `styles/theme.css` | O tema: tokens, tipografia, layouts, código, tabelas |
 | `setup/shiki.ts` | Tema Shiki monocromático (teal só em keywords e decorators) |
 | `setup/mermaid.ts` | Mermaid na mesma paleta |
-| `layouts/` | `shot` (captura com moldura e legenda) e `end` |
+| `layouts/` | `bleed` (arte da organização, edge-to-edge), `shot` (captura com moldura e legenda) e `end` |
 | `global-top.vue` | Rodapé com evento e contador de slides |
-| `public/` | Capturas do Done, QR codes, `og-cover.png`, config de SPA fallback |
+| `public/` | Slides da organização (`00-org-*.png`), capturas do Done, QR codes, `og-cover.png`, config de SPA fallback |
 | `scripts/` | `deploy.mjs` e `qr.mjs` |
 
 ## Roteiro (50 min)
 
 | # | Seção | Slides | Alvo |
 | :--- | :--- | :--- | :--- |
-| 0 | Capa, quem fala, a lacuna, premissa | 1–5 | 00:00 |
-| 1 | A plataforma: Rayfin × Fabric Apps, três serviços filhos, `rayfin up`, pré-requisitos, regiões | 6–11 | 00:04 |
-| 2 | Duas formas de app e a forma híbrida | 12–14 | 00:10 |
-| 3 | Code-first: entity, permissão, client tipado, schema, cinco comandos | 15–21 | 00:15 |
-| 4 | Modelo semântico como backend: `fabric.yaml`, client, hook, DAX, dois modelos, auth embutida, template | 22–31 | 00:22 |
-| 5 | Demo gravada: Done e Receita Saudável, o que a demo prova | 32–36 | 00:34 |
-| 6 | Feito para agentes | 37–39 | 00:38 |
-| 7 | Deploy, custo, SSO, CI/CD com service principal, dev/prod | 40–44 | 00:41 |
-| 8 | O que mudou desde junho e roadmap | 45–46 | 00:46 |
-| 9 | Quando vale a pena, para levar, QR, fim | 47–50 | 00:48 |
+| – | Slides da organização: evento, patrocinadores, comunidade | 1–3 | antes do relógio |
+| 0 | Capa, quem fala, a lacuna, premissa | 4–8 | 00:00 |
+| 1 | A plataforma: Rayfin × Fabric Apps, três serviços filhos, `rayfin up`, pré-requisitos, regiões | 9–14 | 00:04 |
+| 2 | Duas formas de app e a forma híbrida | 15–17 | 00:10 |
+| 3 | Code-first: entity, permissão, client tipado, schema, cinco comandos | 18–24 | 00:15 |
+| 4 | Modelo semântico como backend: `fabric.yaml`, client, hook, DAX, dois modelos, auth embutida, template | 25–34 | 00:22 |
+| 5 | Demo gravada: Done e Receita Saudável, o que a demo prova | 35–39 | 00:34 |
+| 6 | Feito para agentes | 40–42 | 00:38 |
+| 7 | Deploy, custo, SSO, CI/CD com service principal, dev/prod | 43–47 | 00:41 |
+| 8 | O que mudou desde junho e roadmap | 48–49 | 00:46 |
+| 9 | Quando vale a pena, para levar, QR, fim | 50–53 | 00:48 |
 
 ## Antes do evento
 
-- [ ] **Capturas do Receita Saudável**: abrir o app no portal, capturar Visão executiva e Clientes em risco (só dado sintético), salvar em `public/06-rs-*.png` e trocar o slide 35 por dois slides `layout: shot`
+- [ ] **Capturas do Receita Saudável**: abrir o app no portal, capturar Visão executiva e Clientes em risco (só dado sintético), salvar em `public/06-rs-*.png` e trocar o slide 38 por dois slides `layout: shot`
 - [ ] **Vídeo**: se a rede do evento for confiável, remover `hide: true` do slide do YouTube em `slides/06-demo.md`
-- [ ] Publicar este repositório no GitHub e **escanear o QR** do slide 49 com o celular
-- [ ] Reconferir `npm view @microsoft/rayfin-cli version` e a página de regiões do Learn — o slide 45 e o slide 11 envelhecem rápido
+- [ ] Publicar este repositório no GitHub e **escanear o QR** do slide 52 com o celular
+- [ ] Reconferir `npm view @microsoft/rayfin-cli version` e a página de regiões do Learn — o slide 48 e o slide 14 envelhecem rápido
 - [ ] Se for publicar o deck, confirmar a URL em `index.html` (Open Graph) e criar `.env` com `DEPLOYMENT_TOKEN=<token>` do Static Web App
+- [ ] **Slides da organização**: confirmar com o TIES que `public/00-org-*.png` são as versões finais — as atuais estão em 1920×1080, nativas do projetor
 - [ ] Rodar `npm run export:png` e olhar a grade uma última vez
 
 ## Convenções

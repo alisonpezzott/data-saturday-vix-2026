@@ -18,6 +18,53 @@ fonts:
   sans: Geist Variable
   mono: Geist Mono Variable
   provider: none
+
+# Slide 1 belongs to the organisers. The headmatter block is also the first
+# slide's frontmatter, so opening on their artwork means setting it here.
+layout: bleed
+image: /00-org-cover.png
+alt: >-
+  Capa do Data Saturday 2026, no Centro Universitário Salesiano, Av. Vitória
+  950, Forte São João, Vitória, ES.
+---
+
+<!--
+Antes do relógio. Os três slides da organização sobem enquanto a sala acomoda e
+durante a apresentação do palestrante; o tempo da palestra só começa na capa.
+Não ler o endereço em voz alta, a plateia já está nele.
+-->
+
+---
+layout: bleed
+image: /00-org-sponsors.png
+alt: >-
+  Patrocinadores oficiais por cota. Diamante: Microsoft e AMD. Ouro: UniSales,
+  Azure Brasil Cloud e TOTVS. Prata: LEAD e Globalsys. Bronze: GGTIC-ES, Casa do
+  Notebook e Mecânica dos Dados. Apoio: MaxisPlus, V1, BSides Vitória e
+  DC5527.
+---
+
+<!--
+Antes do relógio.
+Slide da organização: agradecer os patrocinadores em uma frase e seguir. Não ler
+a lista, ela está projetada e legível.
+-->
+
+---
+layout: bleed
+image: /00-org-community.png
+alt: >-
+  Convite para entrar na comunidade do WhatsApp do TIES, com QR code, em
+  ties.dev.br.
+---
+
+<!--
+Antes do relógio.
+Slide da organização: cinco segundos de silêncio para quem quiser escanear o QR
+da comunidade. Depois emendar direto na capa, já com o cronômetro em 00:00.
+-->
+
+---
 layout: cover
 ---
 
