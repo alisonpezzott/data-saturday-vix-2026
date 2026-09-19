@@ -5,6 +5,7 @@ info: |
   Data & AI Saturday Vitória, 19 de setembro de 2026. 50 minutos.
   Arquitetura, as duas formas de app, code-first, modelos semânticos como backend,
   agentes, deploy, custo e o que mudou desde o preview de junho.
+  Infográficos e código real; o texto corrido fica nas notas.
 author: Alison Pezzott
 transition: fade
 lineNumbers: true
@@ -78,12 +79,17 @@ layout: cover
   <span><strong>Alison Pezzott</strong></span>
   <span>Head de BI &amp; Analytics · Power Tuning</span>
   <span>Microsoft MVP · MCT</span>
+  <span>Done · Receita Saudável</span>
 </div>
 
 <!--
 Alvo: 00:00.
+Quem fala cabe na linha de meta, trinta segundos e não mais: Head de BI &
+Analytics na Power Tuning, MVP Data Platform, MCT, e dois Fabric Apps públicos
+construídos com Rayfin, o Done e o Receita Saudável, que voltam como captura e
+como código ao longo da palestra. O QR do GitHub e do YouTube fica no fim.
 Abrir com a promessa, não com o sumário: "nos próximos 50 minutos a gente vai ver
-TypeScript virar um item do workspace — e vai ver o modelo semântico que vocês já
+TypeScript virar um item do workspace, e vai ver o modelo semântico que vocês já
 governam virar o backend de um app. Sem demo ao vivo: tudo que aparece aqui está
 deployado, gravado e público."
 -->

@@ -1,10 +1,11 @@
 # Microsoft Fabric Apps: aplicativos de dados code-first com Rayfin
 
 Deck Slidev da palestra de 50 minutos no **Data & AI Saturday Vitória 2026**
-(19 de setembro de 2026, UniSales). Cinquenta slides em pt-BR, tema próprio
+(19 de setembro de 2026, UniSales). Trinta e cinco slides em pt-BR, tema próprio
 monocromático (preto, cinzas e um único acento teal), fontes Geist e Geist Mono
 empacotadas para renderizar offline no palco, sem demo ao vivo: os dois Fabric
-Apps citados aparecem como capturas e como código real.
+Apps citados aparecem como capturas e como código real. O texto corrido mora nas
+notas de apresentador; o slide carrega infográfico, código ou uma frase.
 
 ## Rodar
 
@@ -33,8 +34,9 @@ claude mcp add --transport http slidev http://localhost:3030/__mcp
 | :--- | :--- |
 | `slides.md` | Headmatter, os três slides da organização e a capa; importa as dez seções |
 | `slides/NN-*.md` | Uma seção por arquivo, com notas de apresentador e alvo de tempo em cada slide |
-| `snippets/` | Código real importado com `<<<`: entities, policies, `rayfin.yml`, `fabric.yaml`, hook, DAX, GitHub Actions |
+| `snippets/` | Código real importado com `<<<`: policy, DAX, GitHub Actions (os demais ficam como referência) |
 | `styles/theme.css` | O tema: tokens, tipografia, layouts, código, tabelas |
+| `styles/infographics.css` | Primitivas de infográfico: `tiles`, `steps`, `flow`, `host`, `compare`, listas com glifo, `timeline`, `strip`, `tags`, `score` |
 | `setup/shiki.ts` | Tema Shiki monocromático (teal só em keywords e decorators) |
 | `setup/mermaid.ts` | Mermaid na mesma paleta |
 | `layouts/` | `bleed` (arte da organização, edge-to-edge), `shot` (captura com moldura e legenda) e `end` |
@@ -42,28 +44,33 @@ claude mcp add --transport http slidev http://localhost:3030/__mcp
 | `public/` | Slides da organização (`00-org-*.png`), capturas do Done, QR codes, `og-cover.png`, config de SPA fallback |
 | `scripts/` | `deploy.mjs` e `qr.mjs` |
 
+Ícones vêm do conjunto Carbon (`@iconify-json/carbon`, que já chega como dependência
+do `@slidev/client` e fica travado no `package-lock.json`) e entram no Markdown como
+componente: `<carbon-sql />`. Não há divisores de seção; a primeira slide de
+cada seção leva um eyebrow `###### 01 · Nome da seção`.
+
 ## Roteiro (50 min)
 
 | # | Seção | Slides | Alvo |
 | :--- | :--- | :--- | :--- |
 | – | Slides da organização: evento, patrocinadores, comunidade | 1–3 | antes do relógio |
-| 0 | Capa, quem fala, a lacuna, premissa | 4–8 | 00:00 |
-| 1 | A plataforma: Rayfin × Fabric Apps, três serviços filhos, `rayfin up`, pré-requisitos, regiões | 9–14 | 00:04 |
-| 2 | Duas formas de app e a forma híbrida | 15–17 | 00:10 |
-| 3 | Code-first: entity, permissão, client tipado, schema, cinco comandos | 18–24 | 00:15 |
-| 4 | Modelo semântico como backend: `fabric.yaml`, client, hook, DAX, dois modelos, auth embutida, template | 25–34 | 00:22 |
-| 5 | Demo gravada: Done e Receita Saudável, o que a demo prova | 35–39 | 00:34 |
-| 6 | Feito para agentes | 40–42 | 00:38 |
-| 7 | Deploy, custo, SSO, CI/CD com service principal, dev/prod | 43–47 | 00:41 |
-| 8 | O que mudou desde junho e roadmap | 48–49 | 00:46 |
-| 9 | Quando vale a pena, para levar, QR, fim | 50–53 | 00:48 |
+| 0 | Capa (quem fala vai na linha de meta), a lacuna, premissa | 4–6 | 00:00 |
+| 1 | A plataforma: Rayfin × Fabric Apps, três serviços filhos, `rayfin up`, pré-requisitos e regiões | 7–10 | 00:04 |
+| 2 | Duas formas de app e a forma híbrida | 11–12 | 00:11 |
+| 3 | Code-first: entity (magic-move), permissão, evolução de schema, cinco comandos | 13–16 | 00:15 |
+| 4 | Modelo semântico como backend: do alias ao hook, DAX, dois modelos, só no portal, modelo mais simples | 17–21 | 00:23 |
+| 5 | Demo gravada: Done (duas capturas), Receita Saudável, o que a demo prova | 22–25 | 00:33 |
+| 6 | Feito para agentes | 26 | 00:38 |
+| 7 | CU, SSO, CI/CD com service principal, dev/prod | 27–30 | 00:40 |
+| 8 | O que mudou desde junho, com roadmap | 31 | 00:46 |
+| 9 | Quando vale a pena, para levar, QR, fim | 32–35 | 00:48 |
 
 ## Antes do evento
 
-- [ ] **Capturas do Receita Saudável**: abrir o app no portal, capturar Visão executiva e Clientes em risco (só dado sintético), salvar em `public/06-rs-*.png` e trocar o slide 38 por dois slides `layout: shot`
+- [ ] **Capturas do Receita Saudável**: abrir o app no portal, capturar Visão executiva e Clientes em risco (só dado sintético), salvar em `public/06-rs-*.png` e trocar o slide 24 por dois slides `layout: shot`
 - [ ] **Vídeo**: se a rede do evento for confiável, remover `hide: true` do slide do YouTube em `slides/06-demo.md`
-- [ ] Publicar este repositório no GitHub e **escanear o QR** do slide 52 com o celular
-- [ ] Reconferir `npm view @microsoft/rayfin-cli version` e a página de regiões do Learn — o slide 48 e o slide 14 envelhecem rápido
+- [ ] Publicar este repositório no GitHub e **escanear os dois QR** do slide 34 com o celular
+- [ ] Reconferir `npm view @microsoft/rayfin-cli version` e a página de regiões do Learn — o slide 31 e o slide 10 envelhecem rápido
 - [ ] Se for publicar o deck, confirmar a URL em `index.html` (Open Graph) e criar `.env` com `DEPLOYMENT_TOKEN=<token>` do Static Web App
 - [ ] **Slides da organização**: confirmar com o TIES que `public/00-org-*.png` são as versões finais — as atuais estão em 1920×1080, nativas do projetor
 - [ ] Rodar `npm run export:png` e olhar a grade uma última vez
@@ -71,9 +78,11 @@ claude mcp add --transport http slidev http://localhost:3030/__mcp
 ## Convenções
 
 - Conteúdo dos slides em **pt-BR**; código, comentários, identificadores e commits em **inglês**
-- Um slide, uma ideia: até 6 balas, até 15 linhas de código visíveis, 80 colunas
+- Um slide, uma ideia: infográfico, código ou uma frase; até 15 linhas de código visíveis, 80 colunas; até 5 clicks
+- O que saiu do slide está na nota: as notas são o roteiro, não a repetição do slide
 - Toda afirmação de produto vem de fonte primária (Learn, GitHub, npm) ou está atribuída a quem disse; datas nos slides são as datas das páginas
 - **Nenhum dado real de cliente**: as capturas são dos apps Done e Receita Saudável, com dados sintéticos; GUIDs aparecem como `<workspace-id>`
+- Nada carrega significado só por cor: marcadores são glifos (`+`, `−`, `✓`, `✕`), contadores ou palavras; o teal só sublinha
 - `presenter: dev` só bloqueia a rota; é o `--without-notes` do build que tira as notas do bundle
 - Commits em Conventional Commits com escopo `deck`
 
