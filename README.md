@@ -1,7 +1,7 @@
 # Microsoft Fabric Apps: aplicativos de dados code-first com Rayfin
 
 Deck Slidev da palestra de 50 minutos no **Data & AI Saturday Vitória 2026**
-(19 de setembro de 2026, UniSales). Trinta e cinco slides em pt-BR, tema próprio
+(19 de setembro de 2026, UniSales). Trinta e seis slides em pt-BR, tema próprio
 monocromático (preto, cinzas e um único acento teal), fontes Geist e Geist Mono
 empacotadas para renderizar offline no palco, sem demo ao vivo: os dois Fabric
 Apps citados aparecem como capturas e como código real. O texto corrido mora nas
@@ -41,7 +41,7 @@ claude mcp add --transport http slidev http://localhost:3030/__mcp
 | `setup/mermaid.ts` | Mermaid na mesma paleta |
 | `layouts/` | `bleed` (arte da organização, edge-to-edge), `shot` (captura com moldura e legenda) e `end` |
 | `global-top.vue` | Rodapé com evento e contador de slides |
-| `public/` | Slides da organização (`00-org-*.png`), capturas do Done, QR codes, `og-cover.png`, config de SPA fallback |
+| `public/` | Slides da organização (`00-org-*.png`), capturas do Done e do Receita Saudável, QR codes, `og-cover.png`, config de SPA fallback |
 | `scripts/` | `deploy.mjs` e `qr.mjs` |
 
 Ícones vêm do conjunto Carbon (`@iconify-json/carbon`, que já chega como dependência
@@ -59,18 +59,18 @@ cada seção leva um eyebrow `###### 01 · Nome da seção`.
 | 2 | Duas formas de app e a forma híbrida | 11–12 | 00:11 |
 | 3 | Code-first: entity (magic-move), permissão, evolução de schema, cinco comandos | 13–16 | 00:15 |
 | 4 | Modelo semântico como backend: do alias ao hook, DAX, dois modelos, só no portal, modelo mais simples | 17–21 | 00:23 |
-| 5 | Demo gravada: Done (duas capturas), Receita Saudável, o que a demo prova | 22–25 | 00:33 |
-| 6 | Feito para agentes | 26 | 00:38 |
-| 7 | CU, SSO, CI/CD com service principal, dev/prod | 27–30 | 00:40 |
-| 8 | O que mudou desde junho, com roadmap | 31 | 00:46 |
-| 9 | Quando vale a pena, para levar, QR, fim | 32–35 | 00:48 |
+| 5 | Demo gravada: Done (duas capturas), Receita Saudável (duas capturas), o que a demo prova | 22–26 | 00:33 |
+| 6 | Feito para agentes | 27 | 00:38 |
+| 7 | CU, SSO, CI/CD com service principal, dev/prod | 28–31 | 00:40 |
+| 8 | O que mudou desde junho, com roadmap | 32 | 00:46 |
+| 9 | Quando vale a pena, para levar, QR, fim | 33–36 | 00:48 |
 
 ## Antes do evento
 
-- [ ] **Capturas do Receita Saudável**: abrir o app no portal, capturar Visão executiva e Clientes em risco (só dado sintético), salvar em `public/06-rs-*.png` e trocar o slide 24 por dois slides `layout: shot`
-- [ ] **Vídeo**: se a rede do evento for confiável, remover `hide: true` do slide do YouTube em `slides/06-demo.md`
-- [ ] Publicar este repositório no GitHub e **escanear os dois QR** do slide 34 com o celular
-- [ ] Reconferir `npm view @microsoft/rayfin-cli version` e a página de regiões do Learn — o slide 31 e o slide 10 envelhecem rápido
+- [x] **Capturas do Receita Saudável** em `public/06-rs-*.png`: Visão executiva e Clientes em risco, só dado sintético, slides 24 e 25
+- [ ] **Vídeo**: se a rede do evento for confiável, remover `hide: true` do slide do YouTube em `slides/06-demo.md`, logo após o slide 25
+- [ ] **Escanear os dois QR** do slide 35 com o celular; o repositório já está público no GitHub
+- [ ] Reconferir `npm view @microsoft/rayfin-cli version` e a página de regiões do Learn — o slide 32 e o slide 10 envelhecem rápido
 - [ ] Se for publicar o deck, confirmar a URL em `index.html` (Open Graph) e criar `.env` com `DEPLOYMENT_TOKEN=<token>` do Static Web App
 - [ ] **Slides da organização**: confirmar com o TIES que `public/00-org-*.png` são as versões finais — as atuais estão em 1920×1080, nativas do projetor
 - [ ] Rodar `npm run export:png` e olhar a grade uma última vez

@@ -57,10 +57,17 @@ withDefaults(
   margin: 0;
 }
 
+/* The image takes the height that is left and derives its width from its own
+   aspect ratio, so the frame hugs the picture whether the capture is a wide
+   browser viewport (Done, 2.1:1) or a full 16:10 screen (Receita Saudável).
+   `width: auto` + `align-self: flex-start` is what stops the flex container
+   from stretching the box to the full column width. */
 .shot__fig img {
   flex: 1;
   min-height: 0;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
+  align-self: flex-start;
   object-fit: contain;
   object-position: top left;
   border: 1px solid var(--rule);

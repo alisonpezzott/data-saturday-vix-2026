@@ -40,37 +40,40 @@ e vai voltar daqui a dois slides.
 -->
 
 ---
+layout: shot
+image: /06-rs-executiva.png
+caption: Receita Saudável · Visão executiva · data app aberto no portal do Fabric · dados sintéticos da Nexora Distribuidora
+alt: Tela Visão executiva do app Receita Saudável dentro do portal do Fabric, com filtros, indicadores comerciais e financeiros e o gráfico mensal de receita líquida contra valor recebido
+---
 
 # Receita Saudável: o app *lê* dois modelos
 
-<div class="tiles" style="--cols: 4; margin-top: 0.8rem;">
-  <div class="tile"><h4><span class="ico"><carbon-dashboard /></span>Visão executiva</h4><p>Venda e recebimento no mesmo período</p></div>
-  <div class="tile tile--acc"><h4><span class="ico"><carbon-warning-alt /></span>Clientes em risco</h4><p>Vende muito, paga mal</p></div>
-  <div class="tile"><h4><span class="ico"><carbon-user-avatar /></span>Por vendedor</h4><p>Receita com maior risco financeiro</p></div>
-  <div class="tile"><h4><span class="ico"><carbon-globe /></span>Região e segmento</h4><p>Vende muito, recebe pouco</p></div>
-</div>
-
-<div class="strip" style="margin-bottom: 0.5rem;">
-  <span class="ico"><carbon-filter /></span>
-  <span>Filtro de ano, região e segmento dispara <strong>DAX nova</strong> nos dois modelos</span>
-</div>
-<div class="strip" style="margin-bottom: 0.5rem;">
-  <span class="ico"><carbon-calculation /></span>
-  <span>Nenhuma medida reescrita: <code>[Receita Líquida]</code> e <code>[% Inadimplência]</code> vêm do modelo</span>
-</div>
-<div class="strip" style="margin-bottom: 0.5rem;">
-  <span class="ico"><carbon-launch /></span>
-  <span>Aberto fora do portal: aviso, não erro</span>
-</div>
-
-<p class="credit">Código, modelos .pbip em TMDL e dados sintéticos da Nexora Distribuidora: github.com/alisonpezzott/fabric-app-receita-saudavel</p>
-
 <!--
 Alvo: 00:35.
-TODO antes do evento: capturar duas telas do Receita Saudável no portal (Visão
-executiva e Clientes em risco), conferir que só há dado sintético, salvar em
-public/06-rs-*.png e trocar este slide por dois slides `layout: shot`.
-Se houver rede: reativar o slide seguinte (remover `hide: true`) com o vídeo.
+Indicadores comerciais e financeiros no mesmo período, vindos de dois modelos em
+workspaces diferentes. Filtro de ano, região, segmento e vendedor dispara DAX nova
+nos dois modelos; nenhuma medida reescrita: [Receita Líquida] e [% Inadimplência]
+vêm do modelo. O Índice de Qualidade da Receita é calculado na tela, cruzando os
+dois resultados por ClienteId.
+Código, modelos .pbip em TMDL e dados sintéticos da Nexora Distribuidora:
+github.com/alisonpezzott/fabric-app-receita-saudavel
+-->
+
+---
+layout: shot
+image: /06-rs-risco.png
+caption: Receita Saudável · Clientes em risco · quatro faixas de qualidade e ação recomendada · cruzamento por ClienteId no client
+alt: Tela Clientes em risco do app Receita Saudável, com quatro faixas de qualidade da receita e a tabela de clientes com receita, recebido, vencido, inadimplência, margem e ação recomendada
+---
+
+# Vende muito, paga *mal*
+
+<!--
+Alvo: 00:35:45.
+A pergunta que nenhum dos dois modelos responde sozinho: quem vende muito e paga
+mal. Quatro faixas de qualidade, uma ação recomendada por cliente, tudo calculado
+na tela a partir das duas DAX. Aberto fora do portal: aviso, não erro.
+Se houver rede: o slide seguinte, oculto, tem o vídeo (remover `hide: true`).
 -->
 
 ---
